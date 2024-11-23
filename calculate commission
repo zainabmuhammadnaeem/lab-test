@@ -1,0 +1,69 @@
+<?php
+// Retrieve form data
+$name = $_POST['name'];
+$month = $_POST['month'];
+$sales = $_POST['sales'];
+
+// Initialize commission rate
+$commissionRate = 0;
+
+// Determine commission rate based on sales amount
+if ($sales >= 1 && $sales <= 2000) {
+    $commissionRate = 3;
+} elseif ($sales >= 2001 && $sales <= 5000) {
+    $commissionRate = 4;
+} elseif ($sales >= 5001 && $sales <= 7000) {
+    $commissionRate = 7;
+} elseif ($sales > 7000) {
+    $commissionRate = 10;
+}
+
+// Calculate commission amount
+$commission = ($commissionRate / 100) * $sales;
+
+// Display the results
+echo "<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Sales Commission Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .result-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class='result-container'>
+        <h1>Sales Commission</h1>
+        <p><strong>Name:</strong> $name</p>
+        <p><strong>Month:</strong> $month</p>
+        <p><strong>Sales Amount:</strong> RM " . number_format($sales, 2) . "</p>
+        <p><strong>Sales Commission:</strong> RM " . number_format($commission, 2) . "</p>
+    </div>
+</body>
+</html>";
+?>
